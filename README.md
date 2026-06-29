@@ -40,4 +40,4 @@ npm run build
 - Host：海外节点 `https://grsaiapi.com`，国内直连 `https://grsai.dakka.com.cn`
 - 模型：`gpt-image-2` 或 `gpt-image-2-vip`
 
-Grsai 文档中的图片参数为 `urls`。本项目会把本地上传图转为 data URL 传入；如果接口侧要求公网 URL，可在每个任务的「图片 URL」输入框粘贴可访问图片地址后生成。
+Grsai 文档中的图片参数为 `urls`。本项目会把用户上传的本地图片转为 data URL 后随提示词一起传入。
