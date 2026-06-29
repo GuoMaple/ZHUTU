@@ -1,4 +1,4 @@
-import {
+﻿import {
   Download,
   History,
   ImagePlus,
@@ -29,7 +29,6 @@ function createTask(id: number): StudioTask {
     fileName: "",
     inputPreview: "",
     inputPayloadUrl: "",
-    publicImageUrl: "",
     resultUrl: "",
     cachedResult: "",
     progress: 0,
@@ -105,23 +104,6 @@ export default function App() {
       fileName: file.name,
       inputPreview: dataUrl,
       inputPayloadUrl: dataUrl,
-      publicImageUrl: "",
-      resultUrl: "",
-      cachedResult: "",
-      progress: 0,
-      error: "",
-      lastRequestId: ""
-    });
-  }
-
-  function applyImageUrl(taskId: number, url: string) {
-    const nextUrl = url.trim();
-    updateTask(taskId, {
-      status: nextUrl ? "ready" : "empty",
-      fileName: nextUrl ? "图片链接" : "",
-      inputPreview: nextUrl,
-      inputPayloadUrl: nextUrl,
-      publicImageUrl: nextUrl,
       resultUrl: "",
       cachedResult: "",
       progress: 0,
@@ -139,8 +121,7 @@ export default function App() {
       return;
     }
 
-    const imageUrl = task.publicImageUrl.trim() || task.inputPayloadUrl;
-    if (!imageUrl) {
+    if (!task.inputPayloadUrl) {
       setToast("请先上传图片");
       return;
     }
@@ -156,7 +137,7 @@ export default function App() {
     try {
       const { resultUrl, requestId } = await generateMainImage(
         settings,
-        imageUrl,
+        task.inputPayloadUrl,
         DEFAULT_PROMPT,
         (update) => {
           updateTask(taskId, (current) => ({
@@ -287,22 +268,10 @@ export default function App() {
                   }}
                 />
 
-                <div className="url-line">
-                  <input
-                    value={task.publicImageUrl}
-                    onChange={(event) => applyImageUrl(task.id, event.target.value)}
-                    placeholder="图片 URL"
-                    disabled={task.status === "generating"}
-                  />
-                </div>
-
                 <button
                   className="primary-button"
                   onClick={() => generateTask(task.id)}
-                  disabled={
-                    task.status === "generating" ||
-                    (!task.inputPayloadUrl && !task.publicImageUrl)
-                  }
+                  disabled={task.status === "generating" || !task.inputPayloadUrl}
                 >
                   {task.status === "generating" ? (
                     <Loader2 className="spin" size={17} />
@@ -363,10 +332,7 @@ export default function App() {
                   </button>
                   <button
                     className="secondary-button"
-                    disabled={
-                      task.status === "generating" ||
-                      (!task.inputPayloadUrl && !task.publicImageUrl)
-                    }
+                    disabled={task.status === "generating" || !task.inputPayloadUrl}
                     onClick={() => generateTask(task.id)}
                   >
                     <RefreshCw size={16} />
@@ -505,3 +471,4 @@ export default function App() {
     </div>
   );
 }
+

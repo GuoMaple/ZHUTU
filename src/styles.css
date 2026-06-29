@@ -246,11 +246,6 @@ h2 {
   display: block;
 }
 
-.url-line {
-  margin: 10px 0;
-}
-
-.url-line input,
 .settings-modal input,
 .settings-modal select {
   width: 100%;
@@ -263,7 +258,6 @@ h2 {
   outline: none;
 }
 
-.url-line input:focus,
 .settings-modal input:focus,
 .settings-modal select:focus {
   border-color: #245d56;
@@ -564,11 +558,6 @@ h2 {
     height: 24px;
   }
 
-  .url-line {
-    margin: 8px 0;
-  }
-
-  .url-line input,
   .settings-modal input,
   .settings-modal select {
     min-height: 36px;

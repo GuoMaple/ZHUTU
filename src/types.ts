@@ -6,7 +6,6 @@ export interface StudioTask {
   fileName: string;
   inputPreview: string;
   inputPayloadUrl: string;
-  publicImageUrl: string;
   resultUrl: string;
   cachedResult: string;
   progress: number;
