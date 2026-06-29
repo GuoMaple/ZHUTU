@@ -3,5 +3,8 @@ dist
 .api-doc-cache
 .vite-dev.log
 .vite-dev.err.log
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
 .DS_Store
 *.local
